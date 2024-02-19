@@ -1,0 +1,17 @@
+﻿[
+  {
+    "title": "Enhance your knowledge about Video and Animation",
+    "description": "Classes for learning Promotional Videos",
+    "category": "Video & Animation",
+    "subCategory": "Promotional Videos",
+    "tags": "2tag",
+    "serviceType": "One-off service",
+    "locationType": "On-site",
+    "day": [ "Tue", "Wed" ],
+    "startTime": "13:00",
+    "endTime": "14:00",
+    "skillTrade": "Credit",
+    "skillExchangeOrCredit": "6",
+    "active": "Hidden"
+  }
+]

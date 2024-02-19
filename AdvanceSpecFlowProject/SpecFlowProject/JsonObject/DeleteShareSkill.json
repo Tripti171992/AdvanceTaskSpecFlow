@@ -1,0 +1,17 @@
+﻿[
+  {
+    "title": "Programming and Tech training",
+    "description": "Learn QA",
+    "category": "Programming & Tech",
+    "subCategory": "QA",
+    "tags": "4tag",
+    "serviceType": "Hourly basis service",
+    "locationType": "Online",
+    "day": [ "Sun", "Mon" ],
+    "startTime": "16:00",
+    "endTime": "17:00",
+    "skillTrade": "Skill-exchange",
+    "skillExchangeOrCredit": "C",
+    "active": "Active"
+  }
+]
