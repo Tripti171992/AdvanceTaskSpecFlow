@@ -7,38 +7,25 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
     public class ProfileLanguageOverviewComponent : CommonDriver
     {
         private IWebElement addNewLanguageButton;
-        private IWebElement tableHead;
         private IWebElement messageWindow;
         private IWebElement closeMessageIcon;
         public void RenderComponents()
         {
             //------Render component------
-            try
-            {
-                addNewLanguageButton = driver.FindElement(By.XPath("//*[text()='Language']/following-sibling::th[2]/div"));
-                tableHead = driver.FindElement(By.XPath("//th[text()='Language']//ancestor::thead"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            addNewLanguageButton = driver.FindElement(By.XPath("//*[text()='Language']/following-sibling::th[2]/div"));
         }
         public void RenderMessage()
         {
             //------Render message component------
-            try
-            {
-                messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
-                closeMessageIcon = driver.FindElement(By.XPath("//*[@class='ns-close']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+            closeMessageIcon = driver.FindElement(By.XPath("//*[@class='ns-close']"));
         }
         public void ClickAddLanguageButton()
         {
             //------Adding Language------
+
             Wait.WaitToBeClickable(driver, "XPath", "//*[text()='Language']/following-sibling::th[2]/div", 7);
             RenderComponents();
             addNewLanguageButton.Click();
@@ -46,8 +33,8 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public string GetLanguageAddedResult(LanguageModel language)
         {
             //------Return language added result------
+
             WaitForRowsToGetPopulated();
-            RenderComponents();
             // Find all rows in the table
             IReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath("//th[text()='Language']//ancestor::thead/following-sibling::tbody/tr"));
             string result = "Not added";
@@ -68,8 +55,8 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public void ClickUpdateIcon(string language)
         {
             //------Updating Language------
+
             WaitForRowsToGetPopulated();
-            RenderComponents();
             // Find all rows in the table
             IReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath("//th[text()='Language']//ancestor::thead/following-sibling::tbody/tr"));
             foreach (IWebElement row in rows)
@@ -89,8 +76,8 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public string GetUpdatedLanguageResult(UpdateLanguageModel language)
         {
             //------Return language updated result------
+
             WaitForRowsToGetPopulated();
-            RenderComponents();
             // Find all rows in the table
             IReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath("//th[text()='Language']//ancestor::thead/following-sibling::tbody/tr"));
             string result = "Not updated";
@@ -111,8 +98,8 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public void DeleteLanguage(LanguageModel language)
         {
             //------Deleting Language------
+
             WaitForRowsToGetPopulated();
-            RenderComponents();
             // Find all rows in the table
             IReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath("//th[text()='Language']//ancestor::thead/following-sibling::tbody/tr"));
             foreach (IWebElement row in rows)
@@ -133,8 +120,8 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public void DeleteUpdatedLanguage(UpdateLanguageModel language)
         {
             //------Deleting Language------
+
             WaitForRowsToGetPopulated();
-            RenderComponents();
             // Find all rows in the table
             IReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath("//th[text()='Language']//ancestor::thead/following-sibling::tbody/tr"));
             foreach (IWebElement row in rows)
@@ -155,6 +142,7 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public string GetDeleteLanguageResult(LanguageModel language)
         {
             //------Return language deleted result------
+
             WaitForRowsToGetPopulated();
             // Find all rows in the table
             IReadOnlyCollection<IWebElement> rows = driver.FindElements(By.XPath("//th[text()='Language']//ancestor::thead/following-sibling::tbody/tr"));
@@ -175,6 +163,7 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public string GetMessage()
         {
             //------Returning error or success message------
+
             string message = "";
             try
             {
@@ -185,7 +174,7 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
                 Wait.WaitToBeClickable(driver, "XPath", "//*[@class='ns-close']", 5);
                 closeMessageIcon.Click();
             }
-            catch (Exception ex)
+            catch (WebDriverTimeoutException ex)
             {
                 message = ex.Message;
             }
@@ -193,13 +182,13 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         }
         public void WaitForRowsToGetPopulated()
         {
+            //-----Wait for rows to get populated-----
+
             try
             {
-                //wait for rows to get populated
-
                 Wait.WaitToBeVisible(driver, "XPath", "//th[text()='Language']//ancestor::thead/following-sibling::tbody[last()]", 4);
             }
-            catch (Exception ex)
+            catch (WebDriverTimeoutException ex)
             {
                 var exception = ex;
             }

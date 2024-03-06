@@ -179,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When(string.Format("I add invalid skill \'{0}\'", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
- testRunner.Then(string.Format("Invalid skill \'{0}\' should not get added", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("A skill \'{0}\' should not get added", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

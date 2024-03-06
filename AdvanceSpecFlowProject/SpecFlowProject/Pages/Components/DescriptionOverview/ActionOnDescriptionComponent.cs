@@ -1,12 +1,6 @@
 ﻿using SpecFlowProject.Model;
 using SpecFlowProject.Utilities;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpecFlowProject.Pages.Components.DescriptionOverview
 {
@@ -18,27 +12,16 @@ namespace SpecFlowProject.Pages.Components.DescriptionOverview
         public void RenderComponents()
         {
             //------Render component------
-            try
-            {
-                textArea = driver.FindElement(By.XPath("//textarea[contains(@placeholder,' hobbies, additional expertise, or')]"));
-                saveButton = driver.FindElement(By.XPath("(//*[text()='Save'])[2]"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            textArea = driver.FindElement(By.XPath("//textarea[contains(@placeholder,' hobbies, additional expertise, or')]"));
+            saveButton = driver.FindElement(By.XPath("(//*[text()='Save'])[2]"));
         }
         public void RenderMessage()
         {
             //------Render message component------
-            try
-            {
-                messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+
         }
         public void ClickSaveButton()
         {

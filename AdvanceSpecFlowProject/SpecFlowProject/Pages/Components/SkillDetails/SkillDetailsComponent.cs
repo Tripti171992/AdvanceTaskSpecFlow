@@ -1,11 +1,5 @@
-﻿using SpecFlowProject.Model;
-using SpecFlowProject.Utilities;
+﻿using SpecFlowProject.Utilities;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpecFlowProject.Pages.Components.SkillDetails
 {
@@ -24,22 +18,16 @@ namespace SpecFlowProject.Pages.Components.SkillDetails
         public void RenderComponents()
         {
             //--------Render component--------
-            try
-            {
-                skillTitle = driver.FindElement(By.XPath("//h1/span"));
-                skillDescription = driver.FindElement(By.XPath("//div[text()='Description']/following-sibling::div"));
-                skillCategory = driver.FindElement(By.XPath("//div[text()='Category']/following-sibling::div"));
-                skillSubcategory = driver.FindElement(By.XPath("//div[text()='Subcategory']/following-sibling::div"));
-                skillServiceType = driver.FindElement(By.XPath("//div[text()='Service Type']/following-sibling::div"));
-                skillStartDate = driver.FindElement(By.XPath("//div[text()='Start Date']/following-sibling::div"));
-                skillEndDate = driver.FindElement(By.XPath("//div[text()='End Date']/following-sibling::div"));
-                skillsTrade = driver.FindElement(By.XPath("//div[text()='Skills Trade']/following-sibling::div/span"));
-                skillLocationType = driver.FindElement(By.XPath("//div[text()='Location Type']/following-sibling::div"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            skillTitle = driver.FindElement(By.XPath("//h1/span"));
+            skillDescription = driver.FindElement(By.XPath("//div[text()='Description']/following-sibling::div"));
+            skillCategory = driver.FindElement(By.XPath("//div[text()='Category']/following-sibling::div"));
+            skillSubcategory = driver.FindElement(By.XPath("//div[text()='Subcategory']/following-sibling::div"));
+            skillServiceType = driver.FindElement(By.XPath("//div[text()='Service Type']/following-sibling::div"));
+            skillStartDate = driver.FindElement(By.XPath("//div[text()='Start Date']/following-sibling::div"));
+            skillEndDate = driver.FindElement(By.XPath("//div[text()='End Date']/following-sibling::div"));
+            skillsTrade = driver.FindElement(By.XPath("//div[text()='Skills Trade']/following-sibling::div/span"));
+            skillLocationType = driver.FindElement(By.XPath("//div[text()='Location Type']/following-sibling::div"));
         }
         public string GetSkillTitle()
         {
@@ -104,6 +92,5 @@ namespace SpecFlowProject.Pages.Components.SkillDetails
             RenderComponents();
             return skillLocationType.Text;
         }
-
     }
 }

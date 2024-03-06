@@ -12,17 +12,11 @@ namespace SpecFlowProject.Pages.Components.ProfileOverview
         public void RenderComponents()
         {
             //------Render component------
-            try
-            {
-                languagesTab = driver.FindElement(By.XPath("//a[text()='Languages']"));
-                skillsTab = driver.FindElement(By.XPath("//a[text()='Skills']"));
-                educationTab = driver.FindElement(By.XPath("//a[text()='Education']"));
-                certificationsTab = driver.FindElement(By.XPath("//a[text()='Certifications']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            languagesTab = driver.FindElement(By.XPath("//a[text()='Languages']"));
+            skillsTab = driver.FindElement(By.XPath("//a[text()='Skills']"));
+            educationTab = driver.FindElement(By.XPath("//a[text()='Education']"));
+            certificationsTab = driver.FindElement(By.XPath("//a[text()='Certifications']"));
         }
         public void ClickCertificationTab()
         {

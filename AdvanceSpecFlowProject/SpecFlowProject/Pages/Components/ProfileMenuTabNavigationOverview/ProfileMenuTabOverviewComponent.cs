@@ -13,18 +13,11 @@ namespace SpecFlowProject.Pages.Components.ProfileMenuTabNavigationOverview
         public void RenderComponents()
         {
             //------Render component------
-            try
-            {
-                dashboardTab = driver.FindElement(By.XPath("//a[text()='Dashboard']"));
-                profileTab = driver.FindElement(By.XPath("//a[text()='Profile']"));
-                manageListingsTab = driver.FindElement(By.XPath("//a[text()='Manage Listings']"));
-                receivedRequestsTab = driver.FindElement(By.XPath("//a[text()='Received Requests']"));
-                sentRequestsTab = driver.FindElement(By.XPath("//a[text()='Sent Requests']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            dashboardTab = driver.FindElement(By.XPath("//a[text()='Dashboard']"));
+            profileTab = driver.FindElement(By.XPath("//a[text()='Profile']"));
+            manageListingsTab = driver.FindElement(By.XPath("//a[text()='Manage Listings']"));
+            receivedRequestsTab = driver.FindElement(By.XPath("//a[text()='Received Requests']"));
+            sentRequestsTab = driver.FindElement(By.XPath("//a[text()='Sent Requests']"));
         }
         public void ClickDashboardTab()
         {

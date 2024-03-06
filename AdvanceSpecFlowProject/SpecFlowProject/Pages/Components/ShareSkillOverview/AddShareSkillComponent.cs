@@ -33,80 +33,46 @@ namespace SpecFlowProject.Pages.Components.ShareSkillOverview
         public void RenderComponents()
         {
             //--Render component------
-            try
-            {
-                title = driver.FindElement(By.XPath("//input[@name='title']"));
-                description = driver.FindElement(By.XPath("//textarea[@name='description']"));
-                categoryDropDown = driver.FindElement(By.XPath("//select[@name='categoryId']"));
-                tags = driver.FindElement(By.XPath("(//input[@class='ReactTags__tagInputField'])[1]"));
-                hourlyBasisService = driver.FindElement(By.XPath("(//input[@name='serviceType'])[1]"));
-                oneOffService = driver.FindElement(By.XPath("(//input[@name='serviceType'])[2]"));
-                onSiteLocationType = driver.FindElement(By.XPath("(//input[@name='locationType'])[1]"));
-                onLineLocationType = driver.FindElement(By.XPath("(//input[@name='locationType'])[2]"));
-                startDate = driver.FindElement(By.XPath("//input[@name='startDate']"));
-                endDate = driver.FindElement(By.XPath("//input[@name='endDate']"));
-                checkBoxes = driver.FindElements(By.XPath("//div[@class='ui checkbox']"));
-                skillExchangeSkillTrade = driver.FindElement(By.XPath("(//input[@name='skillTrades'])[1]"));
-                creditSkillTrade = driver.FindElement(By.XPath("(//input[@name='skillTrades'])[2]"));
-                skillExchange = driver.FindElement(By.XPath("(//input[@placeholder='Add new tag'])[2]"));
-                activeRadioButton = driver.FindElement(By.XPath("(//input[@name='isActive'])[1]"));
-                hiddenRadioButton = driver.FindElement(By.XPath("(//input[@name='isActive'])[2]"));
-                saveButton = driver.FindElement(By.XPath("//input[@value='Save']"));
-                cancelButton = driver.FindElement(By.XPath("//input[@value='Cancel']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            title = driver.FindElement(By.XPath("//input[@name='title']"));
+            description = driver.FindElement(By.XPath("//textarea[@name='description']"));
+            categoryDropDown = driver.FindElement(By.XPath("//select[@name='categoryId']"));
+            tags = driver.FindElement(By.XPath("(//input[@class='ReactTags__tagInputField'])[1]"));
+            hourlyBasisService = driver.FindElement(By.XPath("(//input[@name='serviceType'])[1]"));
+            oneOffService = driver.FindElement(By.XPath("(//input[@name='serviceType'])[2]"));
+            onSiteLocationType = driver.FindElement(By.XPath("(//input[@name='locationType'])[1]"));
+            onLineLocationType = driver.FindElement(By.XPath("(//input[@name='locationType'])[2]"));
+            startDate = driver.FindElement(By.XPath("//input[@name='startDate']"));
+            endDate = driver.FindElement(By.XPath("//input[@name='endDate']"));
+            checkBoxes = driver.FindElements(By.XPath("//div[@class='ui checkbox']"));
+            skillExchangeSkillTrade = driver.FindElement(By.XPath("(//input[@name='skillTrades'])[1]"));
+            creditSkillTrade = driver.FindElement(By.XPath("(//input[@name='skillTrades'])[2]"));
+            skillExchange = driver.FindElement(By.XPath("(//input[@placeholder='Add new tag'])[2]"));
+            activeRadioButton = driver.FindElement(By.XPath("(//input[@name='isActive'])[1]"));
+            hiddenRadioButton = driver.FindElement(By.XPath("(//input[@name='isActive'])[2]"));
+            saveButton = driver.FindElement(By.XPath("//input[@value='Save']"));
+            cancelButton = driver.FindElement(By.XPath("//input[@value='Cancel']"));
         }
         public void RenderSubCategoryComponents()
         {
             //------Render sub category component------
-            try
-            {
-                subCategoryDropDown = driver.FindElement(By.XPath("//select[@name='subcategoryId']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            subCategoryDropDown = driver.FindElement(By.XPath("//select[@name='subcategoryId']"));
         }
         public void RenderCreditTextBoxComponents()
         {
             //------Render credit textbox component------
-            try
-            {
-                creditTextBox = driver.FindElement(By.XPath("//input[@placeholder='Amount']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            creditTextBox = driver.FindElement(By.XPath("//input[@placeholder='Amount']"));
         }
         public void RenderMessage()
         {
             //------Render message component------
-            try
-            {
-                messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
-                closeMessageIcon = driver.FindElement(By.XPath("//*[@class='ns-close']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+            closeMessageIcon = driver.FindElement(By.XPath("//*[@class='ns-close']"));
+
         }
         public void RenderValidationMessage()
         {
             //------Render validation message component------
-            try
-            {
-                validationMessage = driver.FindElement(By.XPath("//div[@class='ui basic red prompt label transition visible']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            validationMessage = driver.FindElement(By.XPath("//div[@class='ui basic red prompt label transition visible']"));
         }
         public void AddShareSkill(SkillModel skill)
         {

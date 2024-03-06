@@ -1,390 +1,146 @@
-using NUnit.Framework;
-using SpecFlowProject.Hooks;
-using SpecFlowProject.Model;
-using SpecFlowProject.Steps.ShareSkillSteps;
-using SpecFlowProject.Steps;
 using SpecFlowProject.Utilities;
-using System;
 using TechTalk.SpecFlow;
+using SpecFlowProject.Services.ShareSkillServices;
+using SpecFlowProject.Services;
 
 namespace SpecFlowProject.StepDefinitions
 {
     [Binding]
     public class ManageListingStepDefinitions : CommonDriver
     {
-        HomePageSteps HomePageStepsObj;
-        AddShareSkillSteps AddShareSkillStepsObj;
-        ManageListingsComponentSteps ManageListingsComponentStepsObj;
-        SkillDetailsSteps SkillDetailsStepsObj;
+        HomePageService HomePageServiceObj;
+        AddShareSkillService AddShareSkillServiceObj;
+        ManageListingsComponentService ManageListingsComponentServiceObj;
         public ManageListingStepDefinitions()
         {
-            HomePageStepsObj = new HomePageSteps();
-            AddShareSkillStepsObj = new AddShareSkillSteps();
-            ManageListingsComponentStepsObj = new ManageListingsComponentSteps();
-            SkillDetailsStepsObj = new SkillDetailsSteps();
+            HomePageServiceObj = new HomePageService();
+            AddShareSkillServiceObj = new AddShareSkillService();
+            ManageListingsComponentServiceObj = new ManageListingsComponentService();
         }
+
         [When(@"I deleted skill '([^']*)'")]
-        public void WhenIDeletedSkill(string userSkill)
+        public void WhenIDeletedSkill(string skillPath)
         {
             //-- Delete Skill--
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
 
-                //Adding Share skill
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickShareSkillButton();
-                    AddShareSkillStepsObj.AddShareSkill(skill);
-                }
-                //Deleting share skill
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.DeleteShareSkill(skill);
-                    ManageListingsComponentStepsObj.ValidateDeleteSkillMessage(skill);
-                    Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "DeleteShareSkill"), "Delete Share Skill successful");
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "DeleteShareSkill"), "Exception in delete Share Skill");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            AddShareSkillServiceObj.AddShareSkill(skillPath);
+            ManageListingsComponentServiceObj.DeleteShareSkill(skillPath);
         }
 
         [Then(@"A skill '([^']*)' should get deleted")]
-        public void ThenASkillShouldGetDeleted(string userSkill)
+        public void ThenASkillShouldGetDeleted(string skillPathl)
         {
             //------Validating skill deleted----------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.ValidateSkillDeleted(skill);
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "DeleteShareSkill"), "Exception in validating Skill deleted");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            ManageListingsComponentServiceObj.ValidateSkillDeleted(skillPathl);
         }
 
         [When(@"I updated a skill '([^']*)' detail to new skilldetails '([^']*)'")]
-        public void WhenIUpdatedASkillDetailToNewSkilldetails(string userSkill, string newSkill)
+        public void WhenIUpdatedASkillDetailToNewSkilldetails(string oldSkillPath, string newSkillPath)
         {
             //------Updating skill details------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
-                List<SkillModel> newSkillList = JsonReader.GetData<SkillModel>(newSkill);
 
-                //Deleting share skill if exist
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickManageListingsTab();
-                    ManageListingsComponentStepsObj.DeleteShareSkill(skill);
-
-                }
-                //Adding hidden share skill 
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickShareSkillButton();
-                    AddShareSkillStepsObj.AddShareSkill(skill);
-                }
-                //Update skill details
-                foreach (var skill in newSkillList)
-                {
-                    ManageListingsComponentStepsObj.UpdateSkillDetails(skill);
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateSkillDetails"), "Exception in update skill details");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.DeleteShareSkill(oldSkillPath);
+            AddShareSkillServiceObj.AddShareSkill(oldSkillPath);
+            ManageListingsComponentServiceObj.UpdateSkillDetails(newSkillPath);
         }
 
         [Then(@"A skill '([^']*)' should get updated")]
-        public void ThenASkillShouldGetUpdated(string newSkill)
+        public void ThenASkillShouldGetUpdated(string newSkillPath)
         {
             //------Validating skill details updated------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(newSkill);
 
-                //Validate skill details updated
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.ValidateSkillUpdated(skill);
-                    Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateSkillDetails"), "Update skill details successful");
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateSkillDetails"), "Exception in update skill details validation");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            ManageListingsComponentServiceObj.ValidateSkillUpdated(newSkillPath);
         }
 
         [When(@"I updated a skill '([^']*)' detail to new invalid skilldetails '([^']*)'")]
-        public void WhenIUpdatedASkillDetailToNewInvalidSkilldetails(string userSkill, string newSkill)
+        public void WhenIUpdatedASkillDetailToNewInvalidSkilldetails(string oldSkillPath, string newSkillPath)
         {
             //------Updating invalid skill details------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
-                List<SkillModel> newSkillList = JsonReader.GetData<SkillModel>(newSkill);
 
-                //Deleting share skill if exist
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickManageListingsTab();
-                    ManageListingsComponentStepsObj.DeleteShareSkill(skill);
-
-                }
-                //Adding share skill 
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickShareSkillButton();
-                    AddShareSkillStepsObj.AddShareSkill(skill);
-                }
-                //Update invalid skill details
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.UpdateSkillDetails(skill);
-                    Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateInvalidSkillDetails"), "Update invalid skill details successful");
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateInvalidSkillDetails"), "Exception in update invalid skill details");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.DeleteShareSkill(oldSkillPath);
+            AddShareSkillServiceObj.AddShareSkill(oldSkillPath);
+            ManageListingsComponentServiceObj.UpdateInvalidSkillDetails(newSkillPath);
         }
 
         [Then(@"A skill '([^']*)' should not get updated")]
-        public void ThenASkillShouldNotGetUpdated(string userSkill)
+        public void ThenASkillShouldNotGetUpdated(string skillPath)
         {
-            //------validating invalid skill details updation------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.ValidateSkillNotUpdated(skill);
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateInvalidSkillDetails"), "Exception in update invalid skill details validation");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            //------validating invalid skill details not updated------
+
+            ManageListingsComponentServiceObj.ValidateSkillNotUpdated(skillPath);
         }
 
         [Then(@"Skill'([^']*)' status should get changed to active on activation")]
-        public void ThenSkillStatusShouldGetChangedToActiveOnActivation(string userSkill)
+        public void ThenSkillStatusShouldGetChangedToActiveOnActivation(string skillPath)
         {
             //------Activate skill details------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
 
-                //Deleting share skill if exist
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickManageListingsTab();
-                    ManageListingsComponentStepsObj.DeleteShareSkill(skill);
-                }
-                //Adding hidden share skill 
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickShareSkillButton();
-                    AddShareSkillStepsObj.AddShareSkill(skill);
-                }
-                //Activating share skill
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.ActivateShareSkill(skill);
-                    Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "ActivateShareSkill"), "Activate Share Skill successful");
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "ActivateShareSkill"), "Exception in activate Share Skill");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.DeleteShareSkill(skillPath);
+            AddShareSkillServiceObj.AddShareSkill(skillPath);
+            ManageListingsComponentServiceObj.ActivateShareSkill(skillPath);
         }
 
         [Then(@"Skill'([^']*)' status should get changed to deactive on deactivation")]
-        public void ThenSkillStatusShouldGetChangedToDeactiveOnDeactivation(string userSkill)
+        public void ThenSkillStatusShouldGetChangedToDeactiveOnDeactivation(string skillPath)
         {
             //------Deactivate skill details------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
 
-                //Deleting share skill if exist
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickManageListingsTab();
-                    ManageListingsComponentStepsObj.DeleteShareSkill(skill);
-                }
-                //Adding active share skill 
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickShareSkillButton();
-                    AddShareSkillStepsObj.AddShareSkill(skill);
-                }
-                //Deactivating share skill
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.DeactivateShareSkill(skill);
-                    Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "DeactivateShareSkill"), "Deactivate Share Skill successful");
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "DeactivateShareSkill"), "Exception in deactivate Share Skill");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.DeleteShareSkill(skillPath);
+            AddShareSkillServiceObj.AddShareSkill(skillPath);
+            ManageListingsComponentServiceObj.DeactivateShareSkill(skillPath);
         }
 
         [Then(@"I navigated to next page on clicking on next page")]
         public void ThenINavigatedToNextPageOnClickingOnNextPage()
         {
             //------Navigate to next page------
-            try
-            {
-                HomePageStepsObj.ClickManageListingsTab();
-                ManageListingsComponentStepsObj.NavigateToNextPage();
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "NavigateToNextPage"), "Navigate to next page successful");
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "NavigateToNextPage"), "Exception in Navigate to next page");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.NavigateToNextPage();
         }
 
         [Then(@"I navigated to previous page on clicking on previous page")]
         public void ThenINavigatedToPreviousPageOnClickingOnPreviousPage()
         {
             //------Navigate to previous page------
-            try
-            {
-                HomePageStepsObj.ClickManageListingsTab();
-                ManageListingsComponentStepsObj.NavigateToPreviousPage();
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "NavigateToPreviousPage"), "Navigate to previous page successful");
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "NavigateToPreviousPage"), "Exception in previous to next page");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.NavigateToPreviousPage();
         }
 
         [Then(@"I was nevigated to skill'([^']*)' details page on clicking on watch icon")]
-        public void ThenIWasNevigatedToSkillDetailsPageOnClickingOnWatchIcon(string userSkill)
+        public void ThenIWasNevigatedToSkillDetailsPageOnClickingOnWatchIcon(string skillPath)
         {
             //------Watch skill details------
-            try
-            {
 
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
-
-                //Deleting share skill if exist
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickManageListingsTab();
-                    ManageListingsComponentStepsObj.DeleteShareSkill(skill);
-                }
-                //Adding active share skill 
-                foreach (var skill in skillList)
-                {
-                    HomePageStepsObj.ClickShareSkillButton();
-                    AddShareSkillStepsObj.AddShareSkill(skill);
-                }
-                //Watch skill details
-                foreach (var skill in skillList)
-                {
-                    ManageListingsComponentStepsObj.WatchSkillDetails(skill);
-                    SkillDetailsStepsObj.ValidateSkillTitle(skill);
-                    Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "WatchShareSkillDetails"), "Watch skill details successful");
-                    HomePageStepsObj.ClickManageListingsTab();
-                }
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "WatchShareSkillDetails"), "Exception in watch skill details");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.DeleteShareSkill(skillPath);
+            AddShareSkillServiceObj.AddShareSkill(skillPath);
+            ManageListingsComponentServiceObj.WatchSkillDetails(skillPath);
         }
 
         [When(@"I cancel deleting skill '([^']*)'")]
-        public void WhenICancelDeletingSkill(string userSkill)
+        public void WhenICancelDeletingSkill(string skillPath)
         {
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
+            //------Cancel deleting skill------
 
-                HomePageStepsObj.ClickManageListingsTab();
-
-                //Deleting share skill if exist
-                ManageListingsComponentStepsObj.DeleteShareSkill(skillList[0]);
-
-                //Adding share skill 
-                HomePageStepsObj.ClickShareSkillButton();
-                AddShareSkillStepsObj.AddShareSkill(skillList[0]);
-
-                //Cancel delete share skill
-                ManageListingsComponentStepsObj.CancelDeleteShareSkill(skillList[0]);
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "CancelDeleteShareSkill"), "Exception in cancel delete Share Skill");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            HomePageServiceObj.ClickManageListingsTab();
+            ManageListingsComponentServiceObj.DeleteShareSkill(skillPath);
+            AddShareSkillServiceObj.AddShareSkill(skillPath);
+            ManageListingsComponentServiceObj.CancelDeleteShareSkill(skillPath);
         }
 
         [Then(@"A skill '([^']*)' should not get deleted")]
-        public void ThenASkillShouldNotGetDeleted(string userSkill)
+        public void ThenASkillShouldNotGetDeleted(string skillPath)
         {
-
             //------Validating skill not deleted----------
-            try
-            {
-                List<SkillModel> skillList = JsonReader.GetData<SkillModel>(userSkill);
 
-                ManageListingsComponentStepsObj.ValidateSkillNotDeleted(skillList[0]);
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "CancelDeleteShareSkill"), "Skill not deleted validated.");
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "CancelDeleteShareSkill"), "Exception in validating Skill not deleted");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            ManageListingsComponentServiceObj.ValidateSkillNotDeleted(skillPath);
         }
     }
 }

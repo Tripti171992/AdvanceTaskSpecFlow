@@ -24,7 +24,7 @@ Examples:
 Scenario Outline: Adding invalid skill in the user account.
 	Given I sigin to the Mars portal successfully with valid credentials'<Credentials>'
 	When I add invalid skill '<Skill>'
-	Then Invalid skill '<Skill>' should not get added
+	Then A skill '<Skill>' should not get added
 
 Examples:
 	| Credentials                                                                                                                                                                               | Skill                                                                                                                                                                                          |

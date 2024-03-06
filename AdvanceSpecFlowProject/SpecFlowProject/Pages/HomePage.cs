@@ -21,14 +21,7 @@ namespace SpecFlowProject.Pages
         public void RenderComponents()
         {
             //--------Render component--------
-            try
-            {
-                UserNameLable = driver.FindElement(By.XPath("//span[contains(@class,'item ui')]"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            UserNameLable = driver.FindElement(By.XPath("//span[contains(@class,'item ui')]"));
         }
         public ProfileOverviewComponents GetProfileOverviewComponents()
         {
@@ -51,11 +44,12 @@ namespace SpecFlowProject.Pages
             //--------Return username--------
             try
             {
-                Thread.Sleep(2000);
+                // Thread.Sleep(2000);
+                Wait.WaitToExist(driver, "XPath", "//span[contains(@class,'item ui')]", 3);
                 RenderComponents();
                 return UserNameLable.Text;
             }
-            catch (Exception ex)
+            catch (WebDriverTimeoutException ex)
             {
                 return ex.Message;
             }

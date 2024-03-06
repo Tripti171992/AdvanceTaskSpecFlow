@@ -9,23 +9,13 @@ namespace SpecFlowProject.Pages.Components.ShareSkillOverview
         public void RenderComponents()
         {
             //--------Render component--------
-            try
-            {
-                ShareSkillButton = driver.FindElement(By.XPath("//*[text()='Share Skill']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            ShareSkillButton = driver.FindElement(By.XPath("//*[text()='Share Skill']"));
         }
         public void ClickShareSkillButton()
         {
             //--------Click on ShareSkill button--------
-
-            Wait.WaitToBeClickable(driver, "XPath", "//*[text()='Share Skill']", 6);
-
+            Thread.Sleep(1300);
             RenderComponents();
-
             ShareSkillButton.Click();
         }
     }

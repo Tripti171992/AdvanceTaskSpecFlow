@@ -367,7 +367,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given(string.Format("I sigin to the Mars portal successfully with valid credentials\'{0}\'", credentials), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 63
- testRunner.When(string.Format("I update an old language \'{0}\' details to new language detail \'{1}\'", oldLanguage, newLanguage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I cancel update an old language \'{0}\' details to new language detail \'{1}\'", oldLanguage, newLanguage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 64
  testRunner.Then(string.Format("A language \'{0}\' should not get updated", newLanguage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

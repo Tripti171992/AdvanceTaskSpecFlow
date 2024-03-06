@@ -1,176 +1,83 @@
-using SpecFlowProject.Model;
-using SpecFlowProject.Steps;
-using SpecFlowProject.Steps.DescriptionSteps;
+using SpecFlowProject.Services.DescriptionServices;
 using SpecFlowProject.Utilities;
-using SpecFlowProject.Hooks;
-using System;
 using TechTalk.SpecFlow;
-using NUnit.Framework;
 
 namespace SpecFlowProject.StepDefinitions
 {
     [Binding]
     public class DescriptionStepDefinitions : CommonDriver
     {
-        ActionOnDescriptionSteps ActionOnDescriptionStepsObj;
-        DescriptionOverviewSteps DescriptionOverviewStepsObj;
+        ActionOnDescriptionService ActionOnDescriptionServiceObj;
+        DescriptionOverviewService DescriptionOverviewServiceObj;
         public DescriptionStepDefinitions()
         {
-            ActionOnDescriptionStepsObj = new ActionOnDescriptionSteps();
-            DescriptionOverviewStepsObj = new DescriptionOverviewSteps();
+            ActionOnDescriptionServiceObj = new ActionOnDescriptionService();
+            DescriptionOverviewServiceObj = new DescriptionOverviewService();
         }
 
         [When(@"I added description '([^']*)'")]
-        public void WhenIAddedDescription(string description)
+        public void WhenIAddedDescription(string descriptionPath)
         {
             //-- Add description--
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Adding description
-                ActionOnDescriptionStepsObj.AddUpdateDescription(descriptionList[0]);
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "AddDescription"), "Exception in Add description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            ActionOnDescriptionServiceObj.AddUpdateDescription(descriptionPath);
         }
 
         [Then(@"A description '([^']*)' should get added")]
-        public void ThenADescriptionShouldGetAdded(string description)
+        public void ThenADescriptionShouldGetAdded(string descriptionPath)
         {
             //---------Validate description added---
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Verify the description added
-                DescriptionOverviewStepsObj.ValidateDesciption(descriptionList[0]);
-                //Attaching screenshot with report
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "AddDescription"), "Add description successful");
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "AddDescription"), "Exception in Add description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            DescriptionOverviewServiceObj.ValidateDesciption(descriptionPath);
         }
 
         [When(@"I updated description '([^']*)'")]
-        public void WhenIUpdatedDescription(string description)
+        public void WhenIUpdatedDescription(string descriptionPath)
         {
             //-- Update description--
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Updating description
-                ActionOnDescriptionStepsObj.AddUpdateDescription(descriptionList[0]);
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateDescription"), "Exception in update description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            ActionOnDescriptionServiceObj.AddUpdateDescription(descriptionPath);
         }
 
         [Then(@"A description '([^']*)' should get updated")]
-        public void ThenADescriptionShouldGetUpdated(string description)
+        public void ThenADescriptionShouldGetUpdated(string descriptionPath)
         {
             //---------Validate description updated---
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Verify the description updated
-                DescriptionOverviewStepsObj.ValidateDesciption(descriptionList[0]);
-                //Attaching screenshot with report
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateDescription"), "Update description successful");
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateDescription"), "Exception in Update description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            DescriptionOverviewServiceObj.ValidateDesciption(descriptionPath);
         }
 
         [When(@"I added out of limit description '([^']*)'")]
-        public void WhenIAddedOutOfLimitDescription(string description)
+        public void WhenIAddedOutOfLimitDescription(string descriptionPath)
         {
             //-- Add out of limit description--
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Adding description
-                ActionOnDescriptionStepsObj.AddUpdateOutOfLimitDescription(descriptionList[0]);
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "AddOutOfLimitDescription"), "Exception in add out of limit description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            ActionOnDescriptionServiceObj.AddUpdateOutOfLimitDescription(descriptionPath);
         }
 
         [Then(@"A out of limit description '([^']*)' not should get added")]
-        public void ThenAOutOfLimitDescriptionNotShouldGetAdded(string description)
+        public void ThenAOutOfLimitDescriptionNotShouldGetAdded(string descriptionPath)
         {
-            //---------Validate out of limitd escription added---
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Verify the description added
-                DescriptionOverviewStepsObj.ValidateOutOfLimitDesciption(descriptionList[0]);
-                //Attaching screenshot with report
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "AddOutOfLimitDescription"), "Add out of limit description successful");
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "AddOutOfLimitDescription"), "Exception in add out of limit description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+            //---------Validate out of limit description not added---
+
+            DescriptionOverviewServiceObj.ValidateOutOfLimitDesciption(descriptionPath);
         }
 
         [When(@"I updated out of limit description '([^']*)'")]
-        public void WhenIUpdatedOutOfLimitDescription(string description)
+        public void WhenIUpdatedOutOfLimitDescription(string descriptionPath)
         {
             //-- Update out of limit description--
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Updating description
-                ActionOnDescriptionStepsObj.AddUpdateOutOfLimitDescription(descriptionList[0]);
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateOutOfLimitDescription"), "Exception in update out of limit description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
+
+            ActionOnDescriptionServiceObj.AddUpdateOutOfLimitDescription(descriptionPath);
         }
 
         [Then(@"A out of limit description '([^']*)' not should get updated")]
-        public void ThenAOutOfLimitDescriptionNotShouldGetUpdated(string description)
+        public void ThenAOutOfLimitDescriptionNotShouldGetUpdated(string descriptionPath)
         {
-            //---------Validate out of limitd escription update---
-            try
-            {
-                List<DescriptionModel> descriptionList = JsonReader.GetData<DescriptionModel>(description);
-                //Verify the description updated
-                DescriptionOverviewStepsObj.ValidateOutOfLimitDesciption(descriptionList[0]);
-                //Attaching screenshot with report
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateOutOfLimitDescription"), "Update out of limit description successful");
-            }
-            catch (Exception ex)
-            {
-                Hook.test.AddScreenCaptureFromPath(CommonMethods.SaveScreenshot(driver, "UpdateOutOfLimitDescription"), "Exception in update out of limit description");
-                Hook.test.Fail(ex.Message);
-                Assert.Fail();
-            }
-        }
+            //---------Validate out of limit description not update---
 
+            DescriptionOverviewServiceObj.ValidateOutOfLimitDesciption(descriptionPath);
+        }
     }
 }
+

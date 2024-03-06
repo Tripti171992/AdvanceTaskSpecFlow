@@ -1,9 +1,6 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SpecFlowProject.Hooks;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SpecFlowProject.Utilities
 {
@@ -27,6 +24,12 @@ namespace SpecFlowProject.Utilities
             fileName.Append(".jpeg");
             screenShot.SaveAsFile(fileName.ToString());
             return fileName.ToString();
+        }
+
+        //Add screenshot to report
+        public static void AddScreenCapture(IWebDriver driver, string screeShotFileName)
+        {
+            Hook.test.AddScreenCaptureFromPath(SaveScreenshot(driver, screeShotFileName));
         }
     }
 }

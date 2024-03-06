@@ -29,55 +29,27 @@ namespace SpecFlowProject.Pages.Components.ProfileMenuTabNavigationOverview
         public void RenderComponents()
         {
             //------Render component------
-            try
-            {
-                firstPageTab = driver.FindElement(By.XPath("//button[text()='1']"));
-                previousPageButton = driver.FindElement(By.XPath("//button[text()='<']"));
-                nextPageButton = driver.FindElement(By.XPath("//button[text()='>']"));
-                tableHead = driver.FindElement(By.XPath("//th[text()='Image']//ancestor::thead"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            firstPageTab = driver.FindElement(By.XPath("//button[text()='1']"));
+            previousPageButton = driver.FindElement(By.XPath("//button[text()='<']"));
+            nextPageButton = driver.FindElement(By.XPath("//button[text()='>']"));
+            tableHead = driver.FindElement(By.XPath("//th[text()='Image']//ancestor::thead"));
         }
         public void RenderActivePageComponents()
         {
-            //------Render active page componen------t
-            try
-            {
-                activePageTab = driver.FindElement(By.XPath("//*[@class='ui active button currentPage']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            //------Render active page component----
+            activePageTab = driver.FindElement(By.XPath("//*[@class='ui active button currentPage']"));
         }
         public void RenderMessage()
         {
             //------Render message component------
-            try
-            {
-                messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
-                closeMessageIcon = driver.FindElement(By.XPath("//*[@class='ns-close']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            messageWindow = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+            closeMessageIcon = driver.FindElement(By.XPath("//*[@class='ns-close']"));
         }
         public void DeleteYourServiceConfirmationComponent()
         {
             //--Render delete your service confirmation component--
-            try
-            {
-                deleteServiceYesButton = driver.FindElement(By.XPath("//*[text()='Yes']"));
-                deleteServiceNoButton = driver.FindElement(By.XPath("//*[text()='No']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            deleteServiceYesButton = driver.FindElement(By.XPath("//*[text()='Yes']"));
+            deleteServiceNoButton = driver.FindElement(By.XPath("//*[text()='No']"));
         }
         public void DeleteShareSkill(SkillModel skill)
         {
@@ -121,9 +93,25 @@ namespace SpecFlowProject.Pages.Components.ProfileMenuTabNavigationOverview
             noOfPages = buttons.Count - 2;
             if (GetActivePageNumber() != 1)
             {
-                RenderComponents();
-                firstPageTab.Click();
+                ClickFirstPage();
             }
+        }
+        public void ClickFirstPage()
+        {
+            //----Click on next page buttons-----
+            RenderComponents();
+            firstPageTab.Click();
+            Thread.Sleep(2000);
+            RenderActivePageComponents();
+            activePageNumber = Convert.ToInt32(activePageTab.Text);
+        }
+        public int GetActivePageNumber()
+        {
+            //------Returning active page------
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+            RenderActivePageComponents();
+            activePageNumber = Convert.ToInt32(activePageTab.Text);
+            return activePageNumber;
         }
         public void WatchSkillDetails(SkillModel skill)
         {
@@ -293,22 +281,6 @@ namespace SpecFlowProject.Pages.Components.ProfileMenuTabNavigationOverview
             }
             return result;
         }
-        public int GetActivePageNumber()
-        {
-            //------Returning active page------
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-            RenderActivePageComponents();
-            activePageNumber = Convert.ToInt32(activePageTab.Text);
-            return activePageNumber;
-        }
-        public void ClickNextPage()
-        {
-            //----Click on next page buttons-----
-            nextPageButton.Click();
-            Thread.Sleep(2000);
-            RenderActivePageComponents();
-            activePageNumber = Convert.ToInt32(activePageTab.Text);
-        }
         public void NavigateToPreviousPage()
         {
             //------Move to next page------
@@ -322,6 +294,14 @@ namespace SpecFlowProject.Pages.Components.ProfileMenuTabNavigationOverview
             WaitForRowsToGetPopulated();
             RenderComponents();
             ClickNextPage();
+        }
+        public void ClickNextPage()
+        {
+            //----Click on next page buttons-----
+            nextPageButton.Click();
+            Thread.Sleep(2000);
+            RenderActivePageComponents();
+            activePageNumber = Convert.ToInt32(activePageTab.Text);
         }
         public void ClickPreviousPage()
         {
@@ -395,12 +375,12 @@ namespace SpecFlowProject.Pages.Components.ProfileMenuTabNavigationOverview
         }
         public void WaitForRowsToGetPopulated()
         {
+            //------wait for rows to get populated-----
             try
             {
-                //wait for rows to get populated
                 Wait.WaitToBeVisible(driver, "XPath", "//th[text()='Image']//ancestor::thead/following-sibling::tbody[last()]", 6);
             }
-            catch (Exception ex)
+            catch (WebDriverTimeoutException ex)
             {
                 var exception = ex;
             }
@@ -418,7 +398,7 @@ namespace SpecFlowProject.Pages.Components.ProfileMenuTabNavigationOverview
                 Wait.WaitToBeClickable(driver, "XPath", "//*[@class='ns-close']", 5);
                 closeMessageIcon.Click();
             }
-            catch (Exception ex)
+            catch (WebDriverTimeoutException ex)
             {
                 message = ex.Message;
             }

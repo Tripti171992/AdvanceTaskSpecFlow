@@ -18,33 +18,20 @@ namespace SpecFlowProject.Pages.Components.RegistrationOverview
         public void RenderComponents()
         {
             //------Render component------
-            try
-            {
-                firstNameTextbox = driver.FindElement(By.XPath("//input[@placeholder='First name']"));
-                lastNameTextbox = driver.FindElement(By.XPath("//input[@placeholder='Last name']"));
-                emailTextbox = driver.FindElement(By.XPath("//*[@placeholder='Email address']"));
-                passwordTextbox = driver.FindElement(By.XPath("//*[@placeholder='Password']"));
-                confirmPasswordTextbox = driver.FindElement(By.XPath("//input[@placeholder='Confirm Password']"));
-                checkbox = driver.FindElement(By.XPath("//input[@type='checkbox']"));
-                finalJoinButton = driver.FindElement(By.XPath("//*[@id='submit-btn']"));
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            firstNameTextbox = driver.FindElement(By.XPath("//input[@placeholder='First name']"));
+            lastNameTextbox = driver.FindElement(By.XPath("//input[@placeholder='Last name']"));
+            emailTextbox = driver.FindElement(By.XPath("//*[@placeholder='Email address']"));
+            passwordTextbox = driver.FindElement(By.XPath("//*[@placeholder='Password']"));
+            confirmPasswordTextbox = driver.FindElement(By.XPath("//input[@placeholder='Confirm Password']"));
+            checkbox = driver.FindElement(By.XPath("//input[@type='checkbox']"));
+            finalJoinButton = driver.FindElement(By.XPath("//*[@id='submit-btn']"));
         }
         public void RenderMessageComponents()
         {
             //------Render message component------
-            try
-            {
-                registrationMessage = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            registrationMessage = driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
         }
 
         public void RegistrationInvalid(RegistrationModel user)
@@ -71,15 +58,14 @@ namespace SpecFlowProject.Pages.Components.RegistrationOverview
 
             try
             {
+                Wait.WaitToExist(driver, "XPath", "//div[@class='ns-box-inner']", 2);
                 RenderMessageComponents();
-                Wait.WaitToExist(driver, "XPath", "//div[@class='ns-box-inner']", 1);
                 return registrationMessage.Text;
             }
-            catch (Exception ex)
+            catch (WebDriverTimeoutException ex)
             {
                 return ex.Message;
             }
         }
     }
-
 }

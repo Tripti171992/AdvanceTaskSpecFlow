@@ -3,8 +3,6 @@ using NUnit.Framework;
 using SpecFlowProject.Utilities;
 using TechTalk.SpecFlow;
 using AventStack.ExtentReports;
-using SpecFlowProject.Pages.Components.SignInOverview;
-using SpecFlowProject.Pages;
 using AventStack.ExtentReports.Reporter.Config;
 using AventStack.ExtentReports.Reporter;
 
@@ -47,7 +45,6 @@ namespace SpecFlowProject.Hooks
         [AfterScenario]
         public void AfterScenario()
         {
-
             var status = TestContext.CurrentContext.Result.Outcome.Status;
             if (status == TestStatus.Passed)
             {

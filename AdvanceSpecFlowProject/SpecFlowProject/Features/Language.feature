@@ -60,7 +60,7 @@ Examples:
 	
 Scenario Outline: Cancel updating language with valid credentials
 	Given I sigin to the Mars portal successfully with valid credentials'<Credentials>'
-	When I update an old language '<OldLanguage>' details to new language detail '<NewLanguage>'
+	When I cancel update an old language '<OldLanguage>' details to new language detail '<NewLanguage>'
 	Then A language '<NewLanguage>' should not get updated
 Examples:
 	| Credentials                                                                                                                                                                               | OldLanguage                                                                                                                                                                           | NewLanguage                                                                                                                                                                                    |
