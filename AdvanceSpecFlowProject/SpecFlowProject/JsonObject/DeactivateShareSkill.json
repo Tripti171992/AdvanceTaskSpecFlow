@@ -1,0 +1,17 @@
+﻿[
+  {
+    "title": "Business training",
+    "description": "Presentations Learning",
+    "category": "Business",
+    "subCategory": "Presentations",
+    "tags": "6tag",
+    "serviceType": "One-off service",
+    "locationType": "On-site",
+    "day": [ "Tue", "Wed" ],
+    "startTime": "12:00",
+    "endTime": "13:00",
+    "skillTrade": "Skill-exchange",
+    "skillExchangeOrCredit": "MS Word",
+    "active": "Active"
+  }
+]

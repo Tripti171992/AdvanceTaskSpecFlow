@@ -1,0 +1,17 @@
+﻿[
+  {
+    "title": "Learn to create presentations",
+    "description": "Training to learn how to create presentations",
+    "category": "Business",
+    "subCategory": "Presentations",
+    "tags": "2tag",
+    "serviceType": "One-off service",
+    "locationType": "On-site",
+    "day": [ "Tue", "Wed" ],
+    "startTime": "13:00",
+    "endTime": "14:00",
+    "skillTrade": "Skill-exchange",
+    "skillExchangeOrCredit": "Java",
+    "active": "Hidden"
+  }
+]

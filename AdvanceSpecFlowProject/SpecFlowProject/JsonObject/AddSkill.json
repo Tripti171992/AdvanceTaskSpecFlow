@@ -1,0 +1,63 @@
+﻿[
+  {
+    "title": "Learn Graphics and Design",
+    "description": "Training to learn Graphics and Design",
+    "category": "Graphics & Design",
+    "subCategory": "Logo Design",
+    "tags": "2tag",
+    "serviceType": "One-off service",
+    "locationType": "On-site",
+    "day": [ "Tue", "Wed" ],
+    "startTime": "13:00",
+    "endTime": "14:00",
+    "skillTrade": "Skill-exchange",
+    "skillExchangeOrCredit": "Java",
+    "active": "Hidden"
+  },
+  {
+    "title": "Learn Cooking Indian",
+    "description": "Providing training to learn many Indian dishes",
+    "category": "Fun & Lifestyle",
+    "subCategory": "Health, Nutrition & Fitness",
+    "tags": "1tag",
+    "serviceType": "Hourly basis service",
+    "locationType": "Online",
+    "day": [ "Sun", "Mon" ],
+    "startTime": "16:00",
+    "endTime": "17:00",
+    "skillTrade": "Skill-exchange",
+    "skillExchangeOrCredit": "C#",
+    "active": "Active"
+  },
+  {
+    "title": "Learn Mixing and Mastering in Music and Audio",
+    "description": "Get trained Mixing and Mastering",
+    "category": "Music & Audio",
+    "subCategory": "Mixing & Mastering",
+    "tags": "2tag",
+    "serviceType": "One-off service",
+    "locationType": "On-site",
+    "day": [ "Tue", "Wed" ],
+    "startTime": "13:00",
+    "endTime": "14:00",
+    "skillTrade": "Credit",
+    "skillExchangeOrCredit": "3",
+    "active": "Hidden"
+  },
+
+  {
+    "title": "Learn Video and Animation",
+    "description": "Providing training to learn Video and Animation",
+    "category": "Video & Animation",
+    "subCategory": "Other",
+    "tags": "1tag",
+    "serviceType": "Hourly basis service",
+    "locationType": "Online",
+    "day": [ "Sun", "Mon" ],
+    "startTime": "16:00",
+    "endTime": "17:00",
+    "skillTrade": "Credit",
+    "skillExchangeOrCredit": "4",
+    "active": "Active"
+  }
+]

@@ -1,0 +1,58 @@
+﻿[
+  {
+    "firstName": "",
+    "lastName": "Rawat",
+    "emailAddress": "csdsdsa@gmail.com",
+    "password": "test@123",
+    "confirmPassword": "test@123",
+    "checkbox": "yes"
+  },
+  {
+    "firstName": "Jaya",
+    "lastName": "",
+    "emailAddress": "csdsdsa@gmail.com",
+    "password": "test@123",
+    "confirmPassword": "test@123",
+    "checkbox": "yes"
+  },
+  {
+    "firstName": "Jaya",
+    "lastName": "Rawat",
+    "emailAddress": "csdsdsa123",
+    "password": "test@123",
+    "confirmPassword": "test@123",
+    "checkbox": "yes"
+  },
+  {
+    "firstName": "Jaya",
+    "lastName": "Rawat",
+    "emailAddress": "",
+    "password": "test@123",
+    "confirmPassword": "test@123",
+    "checkbox": "yes"
+  },
+  {
+    "firstName": "Jaya",
+    "lastName": "Rawat",
+    "emailAddress": "csdsdsa123",
+    "password": "",
+    "confirmPassword": "",
+    "checkbox": "yes"
+  },
+  {
+    "firstName": "Jaya",
+    "lastName": "Rawat",
+    "emailAddress": "csdsdsa@123",
+    "password": "test@123",
+    "confirmPassword": "test@12",
+    "checkbox": "yes"
+  },
+  {
+    "firstName": "Jaya",
+    "lastName": "Rawat",
+    "emailAddress": "csdsdsa123",
+    "password": "test@123",
+    "confirmPassword": "test@123",
+    "checkbox": "no"
+  }
+]

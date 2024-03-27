@@ -1,0 +1,17 @@
+﻿[
+  {
+    "title": "Learn Graphics and Design",
+    "description": "",
+    "category": "Graphics & Design",
+    "subCategory": "Logo Design",
+    "tags": "2tag",
+    "serviceType": "One-off service",
+    "locationType": "On-site",
+    "day": [ "Tue", "Wed" ],
+    "startTime": "13:00",
+    "endTime": "14:00",
+    "skillTrade": "Skill-exchange",
+    "skillExchangeOrCredit": "Java",
+    "active": "Hidden"
+  }
+]

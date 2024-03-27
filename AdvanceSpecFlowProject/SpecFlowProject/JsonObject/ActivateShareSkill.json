@@ -1,0 +1,17 @@
+﻿[
+  {
+    "title": "Translation training",
+    "description": "Learn Translation",
+    "category": "Writing & Translation",
+    "subCategory": "Translation",
+    "tags": "5tag",
+    "serviceType": "Hourly basis service",
+    "locationType": "Online",
+    "day": [ "Sun", "Mon" ],
+    "startTime": "16:00",
+    "endTime": "17:00",
+    "skillTrade": "Skill-exchange",
+    "skillExchangeOrCredit": "Python",
+    "active": "Hidden"
+  }
+]

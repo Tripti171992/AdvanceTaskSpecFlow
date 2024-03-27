@@ -1,0 +1,20 @@
+﻿[
+  {
+    "columnName": "Category"
+  },
+  {
+    "columnName": "Title"
+  },
+  {
+    "columnName": "Message"
+  },
+  {
+    "columnName": "Recipient"
+  },
+  {
+    "columnName": "Status"
+  },
+  {
+    "columnName": "Date"
+  }
+]
